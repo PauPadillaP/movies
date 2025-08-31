@@ -1,30 +1,46 @@
+Dashboard de Filmes
 
-# Dashboard de Filmes (Streamlit + Firestore)
-
-Este repositorio contiene un **dashboard interactivo** hecho en **Streamlit** que lee y escribe en **Firestore**.
-Incluye un **Notebook** para analizar `movies.csv` y **migrar** los datos a Firestore.
-
-## Estructura
-- `app.py` — App de Streamlit.
-- `requirements.txt` — Dependencias para Streamlit Cloud.
-- `.streamlit/secrets.toml.template` — Plantilla de secretos para correr en local.
-- `notebooks/migrate_and_eda.ipynb` — Colab/Notebook para EDA + migración CSV→Firestore.
-
-## Pasos rápidos (resumen)
-1. Crea un proyecto en Firebase y habilita **Firestore** (modo production).
-2. Crea una **cuenta de servicio** y descarga el JSON de credenciales.
-3. **Colab/Notebook**: Sube `movies.csv` y el JSON de la cuenta de servicio; ejecuta la celda de migración para crear la colección `movies`.
-4. **Streamlit Cloud**: Crea un repositorio público en GitHub con estos archivos y despliega. En **App secrets** pega el JSON completo bajo la clave `gcp_service_account`.
-5. Abre el dashboard y usa:
-   - ✔️ Checkbox para ver todos los filmes
-   - 🔎 Búsqueda por título (contains, case-insensitive)
-   - 🎬 Filtro por director (selectbox + botón)
-   - ➕ Formulario para insertar un nuevo filme
-
-## Seguridad
-- **No** subas el JSON de credenciales al repo. Usa **Streamlit Secrets**.
-- En local, copia la plantilla de `secrets.toml` y pon tus credenciales reales (no lo confirmes en Git).
+Este proyecto se desarrolló como parte del reto **“Construcción y despliegue en producción de un dashboard interactivo”**.  
+La idea principal fue trabajar con un dataset de películas (`movies.csv`) y llevarlo a un entorno real donde los datos pudieran almacenarse en **Firestore** y visualizarse en un dashboard hecho con **Streamlit**.
 
 ---
 
-_Hecho para el reto académico: migración CSV→Firestore y visualización con Streamlit._
+Qué hace la aplicación?
+
+La aplicación permite:
+- Consultar todos los filmes almacenados en la base de datos.
+- Buscar películas por título (sin importar mayúsculas o minúsculas).
+- Filtrar resultados por director.
+- Insertar nuevas películas a través de un formulario.
+- Descargar los resultados en formato CSV.
+- Ver métricas rápidas (cantidad de filmes, directores únicos y compañías).
+
+Puedes probar la app aquí:  
+[**App en Streamlit Cloud**](https://movies-8pkj3p9zlk8dwja3juu2xt.streamlit.app/)
+
+---
+
+Dataset
+
+El punto de partida fue el archivo `movies.csv`, con 1000 registros de películas.  
+Desde ahí se realizó:
+1. Un análisis exploratorio básico en Jupyter Notebook.  
+2. La migración del CSV a Firestore.  
+3. La verificación de que la app leyera los datos directamente desde Firestore.
+
+---
+
+Entregables del reto
+
+- **Notebook (EDA + migración)**: [`notebooks/migrate_and_eda.ipynb`](notebooks/migrate_and_eda.ipynb)  
+- **Repositorio en GitHub**: [https://github.com/PauPadillaP/movies](https://github.com/PauPadillaP/movies)  
+- **App publicada en Streamlit Cloud**: [https://movies-8pkj3p9zlk8dwja3juu2xt.streamlit.app/](https://movies-8pkj3p9zlk8dwja3juu2xt.streamlit.app/)
+
+---
+
+Cómo ejecutarlo en local
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/PauPadillaP/movies.git
+   cd movies
